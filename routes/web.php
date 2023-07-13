@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
-Use App\Http\Controllers\MessagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,9 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/updateAbout', [ProfileController::class, 'updateAbout'])->middleware('auth');
     Route::post('/updateName', [ProfileController::class,  'updateName'])->middleware('auth');
     Route::post('/updateImg', [ProfileController::class,  'updateImg'])->middleware('auth');
-Route::get('/messages', [MessagesController::class, 'showChat'])->middleware('auth');
-Route::post('/saveMessage', [MessagesController::class, 'saveMessage'])->middleware('auth');
-Route::post('/addPost', [PostController::class,  'addPost'])->middleware('auth');
-//Route::get('/profile', [PostController::class, 'showPost']);
+
+    Route::post('/addPost', [PostController::class,  'addPost'])->middleware('auth');
+    Route::post('/showMyPosts', [PostController::class, 'showMyPosts'])->middleware('auth');
+
 
 require __DIR__.'/auth.php';

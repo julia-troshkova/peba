@@ -38,13 +38,6 @@
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GMKQ4P9YMZ"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-GMKQ4P9YMZ');
-    </script>
 
 </head>
         <body>
@@ -348,8 +341,7 @@
                                                                 <img class="avatar-img rounded-circle" src="" alt="">
                                                             </div>
                                                             <div class="d-block flex-grow-1">
-                                                                <h6 class="mb-0 mt-1"></h6>
-                                                                <div class="small text-secondary"><i class="fa-solid fa-circle text-success me-1"></i>Online</div>
+                                                                <h6 class="mb-0 mt-1">Имя</h6>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -357,7 +349,10 @@
                                                     <div class="chat-conversation-content custom-scrollbar">
                                                         <div class="text-center small my-2">Jul 16, 2022, 06:15 am</div>
                                                         @foreach($messages as $message)
-                                                        <div class="d-flex mb-1">
+                                                            <div class="container">
+                                                                <p>{{$messages->msg}}</p>
+                                                            </div>w
+                                                        {{--<div class="d-flex mb-1">
                                                             <div class="flex-shrink-0 avatar avatar-xs me-2">
                                                                 <img class="avatar-img rounded-circle" src="assets/images/avatar/10.jpg" alt="">
                                                             </div>
@@ -369,7 +364,7 @@
                                                                         <div class="small my-2">6:15 AM</div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div>--}}
                                                             <!-- Блок сообщения конец -->
                                                         </div>
                                                         @endforeach
