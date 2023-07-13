@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->bigInteger('sender_id'); //Id отправителя
+            $table->bigInteger('recipient_id'); //Id получателя
+            $table->text('msg');
         });
     }
 
