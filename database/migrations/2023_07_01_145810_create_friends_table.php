@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('friends', function (Blueprint $table) {
             $table->id();
-            $table->string('frend_1');
-            $table->string('frend_2');
-            $table->timestamp('create');
+            $table->integer('user_id');
+            $table->integer('friend_id');
+            $table->enum('status', ['pending', 'accepted'])->default('pending');
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('friends');
+        Schema::drop('friends');
     }
 };

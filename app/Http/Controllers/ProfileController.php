@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use http\Client\Curl\User;
+use App\Models\Post;
+use App\Models\User ;
+use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,12 +18,7 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
-    {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
+
 
     /**
      * Update the user's profile information.
@@ -63,7 +60,7 @@ class ProfileController extends Controller
     public function updateAbout(Request $request){
         $about = $request->about;
         $id = auth()->user()->getAuthIdentifier();
-        $user =  \App\Models\User::where('id', $id)->first();
+        $user =  User::where('id', $id)->first();
         $user->about = $about;
         $user->save();
         return json_encode(['result'=>'success']);
@@ -72,7 +69,7 @@ class ProfileController extends Controller
         $name = $request->name;
         $lastname = $request->lastname;
         $id = auth()->user()->getAuthIdentifier();
-        $user =  \App\Models\User::where('id', $id)->first();
+        $user =  User::where('id', $id)->first();
         $user->name = $name;
         $user->lastname = $lastname;
         $user->save();
@@ -81,7 +78,7 @@ class ProfileController extends Controller
     public function updateImg(Request $request){
         $img = $request->file('img');
         $id = auth()->user()->getAuthIdentifier();
-        $user = \App\Models\User::where('id', $id)->first();
+        $user = User::where('id', $id)->first();
         $lastimg = $user->img;
         Storage::delete($lastimg);
         $img->storeAS('assets/images/avatar', $id.'.'.$img->getClientOriginalExtension(), 'public');

@@ -15,9 +15,12 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->text('content');
-            $table->bigInteger('author_id');
+            $table->bigInteger('user_id');
+            $table->text('img')->nullable();
+
         });
     }
+
 
     /**
      * Reverse the migrations.

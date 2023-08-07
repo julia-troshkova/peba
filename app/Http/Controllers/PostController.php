@@ -2,48 +2,56 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Posts;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 class PostController extends Controller
 {
-    public function addPost(Request $request){
-        if ($request->hasFile('file')){
-            $path = [];
-            $files = [];
-            $files = $request->file('file');
-            $i=0;
-            $post =  new \App\Models\Posts();
-            while ($i<4){
-                $fileExtension = $files[$i]->getClientOriginalExtension();
-                if ($fileExtension == 'jpg' or 'jpeg' or 'png' or 'gif'){
-                    $path[] = $files[$i]->store('assets/images/post', 'public');
-                    $i++;
-                }else{
-                    return json_encode('Extension not supported');
-                }
+    public function addPost(Request $request)
+    {
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $id = auth()->user()->getAuthIdentifier();
+            $post = new \App\Models\Post();
+            $fileExtension = $file->getClientOriginalExtension();
+            if ($fileExtension == 'jpg' or 'jpeg' or 'png' or 'gif') {
+                $name = time() . $id . "." . $fileExtension;
+                $file->storeAs('assets/images/post', $name, 'public');
+            } else {
+                return json_encode(['result'=>'error']);
             }
-
-            $post->img = implode('; ', $path);
+            $path = 'images/post/' . $name;
+            $post->img = $path;
+            $content = $request->post_content;
+            $post->content = $content;
+            $post->user_id = $id;
+            $post->save();
+            return json_encode(['result'=>'success']);
+        } else {
             $content = $request->post_content;
             $id = auth()->user()->getAuthIdentifier();
+            $post = new \App\Models\Post();
             $post->content = $content;
-            $post->author_id = $id;
+            $post->user_id = $id;
             $post->save();
-
-        }else{
-            $content = $request->post_content;
-            $id = auth()->user()->getAuthIdentifier();
-            $post =  new \App\Models\Posts();
-            $post->content = $content;
-            $post->author_id = $id;
-            $post->save();
+            return json_encode(['result'=>'success']);
         }
+
+
     }
-    public function showMyPosts(){
-        $id = auth()->user()->getAuthIdentifier();
-        $MyPosts = Posts::where('author_id', $id)->all();
-        return response()->json($MyPosts);
+    public function deletePost(Request $request){
+            $postId= $request->id;
+            $post = Post::where('id', $postId)->delete();
+            return json_encode(['result'=>'success']);
+    }
+    public function editePost(Request $request){
+        $postId= $request->id;
+        $postname = 'PostContent'.$postId;
+        $postContent = $request->$postname;
+        $post = Post::where('id', $postId)->first();
+        $post->content = $postContent;
+        $post->save();
+        return json_encode(['result'=>'success']);
     }
 }
