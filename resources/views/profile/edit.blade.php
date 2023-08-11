@@ -45,11 +45,7 @@
 
                                         </div>
                                         <div class="col-sm-6 p-2">
-                                            <button class="btn btn-outline-primary"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    title="Написать сообщение" id="" type="button"
-                                                    aria-expanded="false"><i class="bi bi-chat-left-text"></i>
-                                            </button>
+                                            <a class="btn btn-outline-primary" href="/chat/{userId}" data-bs-toggle="tooltip" data-bs-placement="top" title="Написать сообщение" id="" type="button" aria-expanded="false"><i class="bi bi-chat-left-text"></i></a>
                                         </div>
                                     </div>
                                 </div>

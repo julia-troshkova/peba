@@ -81,7 +81,7 @@
                     <!-- Nav right START -->
                     <ul class="nav flex-nowrap align-items-center ms-sm-3 list-unstyled">
                         <li class="nav-item ms-2">
-                            <a class="nav-link icon-md btn btn-light p-0" href="/messages"><i class="bi bi-chat-left-text"></i></a>
+                            <a class="nav-link icon-md btn btn-light p-0" href="/chat"><i class="bi bi-chat-left-text"></i></a>
                         </li>
                         <li class="nav-item ms-2">
                             <a class="nav-link icon-md btn btn-light p-0" href="/search"><i class="bi bi-search"></i></a>
@@ -135,7 +135,7 @@
 <!-- ======================= -->
 
 <!-- Bootstrap JS -->
-<script src="{{asset("storage/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js")}} "></script>
+<script src="{{asset("assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js")}} "></script>
 
 
 <!-- Vendors -->
